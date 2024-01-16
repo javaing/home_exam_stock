@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Gradle files
 .gradle/
 build/
@@ -31,6 +32,8 @@ google-services.json
 
 # Android Profiling
 *.hprof
+=======
+>>>>>>> 7c3ae083e662453849067f13c5a52333f8753b95
 .gradle
 /local.properties
 /.idea/caches
