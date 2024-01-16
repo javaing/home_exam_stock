@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Home Exam Travel</string>
+    <string name="action_settings">設定</string>
+    <string name="next">下一頁</string>
+    <string name="previous">上一頁</string>
+    <string name="language">選擇語言</string>
+</resources>
