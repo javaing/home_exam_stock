@@ -1,38 +1,41 @@
 package com.arttseng.homeexamtravel
 
-import android.app.Activity
-import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.arttseng.homeexamtravel.tools.toast
 import com.arttseng.homeexamtravel.databinding.ActivityMainBinding
+import com.arttseng.homeexamtravel.viewmodel.MyViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import java.util.Locale
-
+import fuel.Fuel
+import fuel.get
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: MyViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //dealVM = ViewModelProviders(this).get(MyViewModel::class.java)
 
         setSupportActionBar(binding.toolbar)
 
@@ -45,56 +48,10 @@ class MainActivity : AppCompatActivity() {
 //                .setAction("Action", null).show()
 //        }
         //initPopup(binding.toolbar);
-        var deviceLang = Locale.getDefault().language
-        if(deviceLang=="zh") {
-            deviceLang = deviceLang + "-" + Locale.getDefault().country
-        }
-        toast(deviceLang.lowercase(Locale.ROOT))
-    }
+        //get()
 
-//    lateinit var popupMenu:PopupMenu;
-//    fun initPopup(attachView: View) {
-//        popupMenu = PopupMenu(
-//            this,   //context
-//            attachView     //UI View, where clicking the view to show the popup menu
-//        )
-//
-//        //add menu items to popup menu
-//        popupMenu.menu.add(Menu.NONE, 0, 0, "Copy") //2nd param is id of the menu item, used to handle click, 3rd param is at which position the item should be displayed, 4th param is the title of the menu item
-//        popupMenu.menu.add(Menu.NONE, 1, 1, "Share")
-//        popupMenu.menu.add(Menu.NONE, 2, 2, "Save")
-//        popupMenu.menu.add(Menu.NONE, 3, 3, "Delete")
-//
-//        //handle menu item clicks
-//        popupMenu.setOnMenuItemClickListener { menuItem ->
-//
-//            //get id of the item clicked
-//            val id = menuItem.itemId
-//            val text:String;
-//            if (id==0){
-//                //Copy clicked
-//                text = "Copy Clicked"
-//            }
-//            else if (id==1){
-//                //Share clicked
-//                text = "Share Clicked"
-//            }
-//            else if (id==2){
-//                //Save
-//                text = "Save Clicked"
-//            }
-//            else if (id==3){
-//                //Delete clicked
-//                text = "Delete Clicked"
-//            } else {
-//                text = "out of range"
-//            }
-//            Toast.makeText(this@MainActivity, "You Clicked : " + text, Toast.LENGTH_SHORT).show()
-//
-//            false
-//
-//        }
-//    }
+
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -119,13 +76,10 @@ class MainActivity : AppCompatActivity() {
         mListView.setOnItemClickListener { adapterView, view, i, l ->
             val text = (view as TextView).text
             val langs = this.resources.getStringArray(R.array.lang)
+            viewModel.userLang.value = langs[i]
             toast("You Clicked : " + langs[i])
             dialog.dismiss()
         }
-    }
-
-    fun Activity.toast(str:String) {
-        Toast.makeText(this@MainActivity, str, Toast.LENGTH_SHORT).show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

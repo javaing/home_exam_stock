@@ -14,6 +14,10 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+
+        <action
+            android:id="@+id/action_FirstFragment_to_WebViewFragment"
+            app:destination="@id/WebViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -23,6 +27,16 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/WebViewFragment"
+        android:name="com.arttseng.homeexamtravel.WebViewFragment"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+
+        <action
+            android:id="@+id/action_WebViewFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
