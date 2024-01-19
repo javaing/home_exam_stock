@@ -44,4 +44,6 @@
     </string>
     <string name="previous">Previous</string>
     <string name="language">Choose language</string>
+    <string name="lastest_news">Lastest News</string>
+    <string name="no_data">No information yet</string>
 </resources>

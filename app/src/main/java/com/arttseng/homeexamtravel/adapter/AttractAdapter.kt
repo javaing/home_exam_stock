@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.arttseng.homeexamtravel.R
 import com.arttseng.homeexamtravel.datamodel.Attraction
-import com.arttseng.homeexamtravel.tools.roundImage
+import com.arttseng.homeexamtravel.tools.load
 
 class AttractAdapter(onClick: View.OnClickListener) : RecyclerView.Adapter<AttractAdapter.mViewHolder>() {
 
@@ -16,9 +16,7 @@ class AttractAdapter(onClick: View.OnClickListener) : RecyclerView.Adapter<Attra
     val myClick = onClick
 
     inner class mViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-
         //把layout檔的元件們拉進來，指派給當地變數
-        //val icon = itemView.img_news_detail
         val tv_news_title: TextView = itemView.findViewById(R.id.tv_attract_title)
         val img_attract: ImageView = itemView.findViewById(R.id.img_attract)
         val tv_news_desc: TextView = itemView.findViewById(R.id.tv_attract_desc)
@@ -26,10 +24,11 @@ class AttractAdapter(onClick: View.OnClickListener) : RecyclerView.Adapter<Attra
         fun bind(item: Attraction){
             tv_news_title.text = item.name
             if(item.images.isNotEmpty()) {
-                img_attract.roundImage(item.images.first().src)
-                img_attract.visibility = View.VISIBLE
+                img_attract.load(item.images.first().src)
+                //img_attract.visibility = View.VISIBLE
             } else {
-                img_attract.visibility = View.GONE
+                //img_attract.visibility = View.GONE
+                img_attract.setImageResource(R.drawable.ic_landscape)
             }
 
             tv_news_desc.text = item.introduction
@@ -37,10 +36,9 @@ class AttractAdapter(onClick: View.OnClickListener) : RecyclerView.Adapter<Attra
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):mViewHolder {
-
         //載入項目模板
         val inflater = LayoutInflater.from(parent.context)
-        val example = inflater.inflate(R.layout.item_attract_detail, parent, false)
+        val example = inflater.inflate(R.layout.item_attract_simple, parent, false)
         return mViewHolder(example)
 
     }
@@ -48,7 +46,6 @@ class AttractAdapter(onClick: View.OnClickListener) : RecyclerView.Adapter<Attra
     override fun getItemCount() = unAssignList.size
 
     override fun onBindViewHolder(holder: mViewHolder, position: Int) {
-
         //呼叫上面的bind方法來綁定資料
         holder.bind(unAssignList[position])
 

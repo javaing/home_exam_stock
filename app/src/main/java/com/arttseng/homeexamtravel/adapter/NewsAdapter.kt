@@ -30,7 +30,7 @@ class NewsAdapter( onClick: View.OnClickListener) : RecyclerView.Adapter<NewsAda
 
         //載入項目模板
         val inflater = LayoutInflater.from(parent.context)
-        val example = inflater.inflate(R.layout.item_news_detail, parent, false)
+        val example = inflater.inflate(R.layout.item_news_simple, parent, false)
         return mViewHolder(example)
 
     }
@@ -48,5 +48,6 @@ class NewsAdapter( onClick: View.OnClickListener) : RecyclerView.Adapter<NewsAda
     //更新資料用
     fun updateList(list:ArrayList<NewsData>){
         unAssignList = list
+        notifyDataSetChanged()
     }
 }

@@ -40,14 +40,25 @@ fun Fragment.setActivityTitle(title: String) {
 }
 
 fun Context.getLocaleString(
-    lang: String,
+    lang: String?,
     resourceId: Int
 ): String {
+
+    var myLang = lang
+    if(myLang.isNullOrBlank()) myLang = "zh-tw"
+    Utils.log("lang $myLang")
+    val pos = myLang.indexOf("-")
+    val locale = if(pos>0) {
+        Locale(myLang.substring(0, pos), myLang.substring(pos+1))
+    } else {
+        Locale(myLang)
+    }
+
     val result: String
     val config = Configuration(this.resources.configuration)
-    config.setLocale(Locale(lang))
+    config.setLocale(locale)
     result = createConfigurationContext(config).getText(resourceId).toString()
-    Log.e("", "art getLocaleString:"+result)
+    Utils.log("getLocaleString:$result")
     return result
 }
 

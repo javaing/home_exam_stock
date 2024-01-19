@@ -243,6 +243,7 @@ class MyViewModel : ViewModel() {
 
     init {
         userPickLanguage = defaultLang()
+        userLang.value = userPickLanguage
     }
 
     fun getAttract(lang: String = userPickLanguage) {

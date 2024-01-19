@@ -7,4 +7,6 @@
     <string name="next">下一頁</string>
     <string name="previous">上一頁</string>
     <string name="language">選擇語言</string>
+    <string name="lastest_news">最新消息</string>
+    <string name="no_data">暫無資料</string>
 </resources>
