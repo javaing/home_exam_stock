@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.devtools.ksp'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -61,7 +62,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
 
-// Moshi
+    // Moshi
     implementation 'com.squareup.moshi:moshi-kotlin:1.14.0'
     ksp 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0'
     // Kotlin Coroutines
@@ -69,9 +70,5 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1'
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-
-//    implementation("io.ktor:ktor-client-core:$ktor_version")
-//    implementation("io.ktor:ktor-client-cio:$ktor_version")
-
-    implementation("com.github.kittinunf.fuel:fuel:3.0.0-alpha1")
+    implementation 'me.relex:circleindicator:2.1.6'
 }

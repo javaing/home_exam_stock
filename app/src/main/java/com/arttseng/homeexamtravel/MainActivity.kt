@@ -18,11 +18,6 @@ import com.arttseng.homeexamtravel.tools.toast
 import com.arttseng.homeexamtravel.databinding.ActivityMainBinding
 import com.arttseng.homeexamtravel.viewmodel.MyViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import fuel.Fuel
-import fuel.get
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.runBlocking
 
 class MainActivity : AppCompatActivity() {
 
@@ -77,7 +72,7 @@ class MainActivity : AppCompatActivity() {
             val text = (view as TextView).text
             val langs = this.resources.getStringArray(R.array.lang)
             viewModel.userLang.value = langs[i]
-            toast("You Clicked : " + langs[i])
+            //toast("You Clicked : " + langs[i])
             dialog.dismiss()
         }
     }

@@ -11,7 +11,7 @@ import com.arttseng.homeexamtravel.tools.setActivityTitle
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class WebViewFragment() : Fragment() {
+class WebViewFragment : Fragment() {
 
     private var _binding: FragmentWebviewBinding? = null
 

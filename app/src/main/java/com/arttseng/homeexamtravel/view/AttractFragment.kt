@@ -14,9 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arttseng.homeexamtravel.R
 import com.arttseng.homeexamtravel.adapter.AttractAdapter
+import com.arttseng.homeexamtravel.datamodel.Attraction
+import com.arttseng.homeexamtravel.datamodel.Image
 import com.arttseng.homeexamtravel.tools.Utils
 import com.arttseng.homeexamtravel.tools.getLocaleString
 import com.arttseng.homeexamtravel.viewmodel.MyViewModel
+import kotlinx.android.parcel.Parcelize
 
 class AttractFragment : Fragment() {
 
@@ -69,8 +72,9 @@ class AttractFragment : Fragment() {
         attractAdapter = AttractAdapter {
             val position = (it as View).tag as Int
             val bundle = Bundle()
-            bundle.putString("UserURL", attractAdapter.unAssignList[position].url)
-            findNavController().navigate(R.id.action_FirstFragment_to_WebViewFragment, bundle)
+            //bundle.putParcelableArrayList("Images", ArrayList( attractAdapter.unAssignList[position].images ))
+            bundle.putInt("Position", position)
+            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
         }
         recyclerView.adapter = attractAdapter
     }

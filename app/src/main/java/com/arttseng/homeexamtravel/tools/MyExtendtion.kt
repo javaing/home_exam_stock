@@ -2,7 +2,10 @@ package com.arttseng.homeexamtravel.tools
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.Toast
@@ -60,6 +63,15 @@ fun Context.getLocaleString(
     result = createConfigurationContext(config).getText(resourceId).toString()
     Utils.log("getLocaleString:$result")
     return result
+}
+
+fun Activity.openLink(urls: String) {
+    val uris = Uri.parse(urls)
+    val intents = Intent(Intent.ACTION_VIEW, uris)
+    val b = Bundle()
+    b.putBoolean("new_window", true)
+    intents.putExtras(b)
+    startActivity(intents)
 }
 
 

@@ -4,8 +4,12 @@
 
 package com.arttseng.homeexamtravel.datamodel
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
+import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Attractions (
@@ -25,7 +29,7 @@ data class Attraction (
   val name: String,
 
   @Json(name = "name_zh")
-  val nameZh: Any? = null,
+  val nameZh: String? = null,
 
   @Json(name = "open_status")
   val openStatus: Long,
@@ -62,7 +66,7 @@ data class Attraction (
   val files: List<Any?>,
   val links: List<Any?>
 ) {
-//  public fun toJson() = moshi.toJsonString(this)
+  //  public fun toJson() = moshi.toJsonString(this)
 //
 //  companion object {
 //    public fun fromJson(json: String) = moshi.parse<Attractions>(json)
@@ -76,8 +80,6 @@ data class Category (
 )
 
 @JsonClass(generateAdapter = true)
-data class Image (
-  val src: String,
-  val subject: String,
-  val ext: String
-)
+@Parcelize
+data class Image(val src: String, val subject: String, val ext: String):Parcelable
+
