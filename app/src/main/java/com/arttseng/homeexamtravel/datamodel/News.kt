@@ -6,13 +6,7 @@ import com.squareup.moshi.JsonClass
 data class News (
     val total: Long,
     val data: List<NewsData>
-) {
-//    public fun toJson() = klaxon.toJsonString(this)
-//
-//    companion object {
-//        public fun fromJson(json: String) = klaxon.parse<Welcome8>(json)
-//    }
-}
+)
 @JsonClass(generateAdapter = true)
 data class NewsData (
     val id: Long,

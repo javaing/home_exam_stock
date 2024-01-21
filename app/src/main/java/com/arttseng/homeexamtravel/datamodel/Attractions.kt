@@ -1,27 +1,15 @@
-// To parse the JSON, install Klaxon and do:
-//
-//   val welcome10 = Welcome10.fromJson(jsonString)
-
 package com.arttseng.homeexamtravel.datamodel
 
-import android.os.Parcel
 import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
-import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Attractions (
   val total: Long,
   val data: List<Attraction>
-) {
-//    public fun toJson() = klaxon.toJsonString(this)
-//
-//    companion object {
-//        public fun fromJson(json: String) = klaxon.parse<Welcome8>(json)
-//    }
-}
+)
 
 @JsonClass(generateAdapter = true)
 data class Attraction (
@@ -65,13 +53,7 @@ data class Attraction (
   val images: List<Image>,
   val files: List<Any?>,
   val links: List<Any?>
-) {
-  //  public fun toJson() = moshi.toJsonString(this)
-//
-//  companion object {
-//    public fun fromJson(json: String) = moshi.parse<Attractions>(json)
-//  }
-}
+)
 
 @JsonClass(generateAdapter = true)
 data class Category (

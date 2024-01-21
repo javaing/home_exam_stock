@@ -12,14 +12,14 @@ import com.arttseng.homeexamtravel.tools.load
 
 class ImageAdapter(data: List<Image>) : RecyclerView.Adapter<ImageAdapter.mViewHolder>() {
 
-    var unAssignList = data
+    private var unAssignList = data
 
     inner class mViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         //把layout檔的元件們拉進來，指派給當地變數
         val iv_images: ImageView = itemView.findViewById(R.id.iv_images)
 
         fun bind(item: Image){
-            Utils.log("image load:" + item.src)
+            //Utils.log("image load:" + item.src)
             if(item.src.isNotEmpty()) {
                 iv_images.load(item.src)
             } else {

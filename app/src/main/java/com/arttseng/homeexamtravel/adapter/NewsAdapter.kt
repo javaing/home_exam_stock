@@ -11,7 +11,7 @@ import com.arttseng.homeexamtravel.datamodel.NewsData
 class NewsAdapter( onClick: View.OnClickListener) : RecyclerView.Adapter<NewsAdapter.mViewHolder>() {
 
     var unAssignList = arrayListOf<NewsData>()
-    val myClick = onClick
+    private val myClick = onClick
 
     inner class mViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 

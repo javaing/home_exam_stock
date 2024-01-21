@@ -12,7 +12,7 @@ import com.arttseng.homeexamtravel.tools.load
 
 class AttractAdapter(onClick: View.OnClickListener) : RecyclerView.Adapter<AttractAdapter.mViewHolder>() {
 
-    var unAssignList = arrayListOf<Attraction>()
+    private var unAssignList = arrayListOf<Attraction>()
     val myClick = onClick
 
     inner class mViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -25,9 +25,7 @@ class AttractAdapter(onClick: View.OnClickListener) : RecyclerView.Adapter<Attra
             tv_news_title.text = item.name
             if(item.images.isNotEmpty()) {
                 img_attract.load(item.images.first().src)
-                //img_attract.visibility = View.VISIBLE
             } else {
-                //img_attract.visibility = View.GONE
                 img_attract.setImageResource(R.drawable.ic_landscape)
             }
 

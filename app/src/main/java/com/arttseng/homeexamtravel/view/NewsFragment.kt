@@ -19,12 +19,12 @@ import com.arttseng.homeexamtravel.viewmodel.MyViewModel
 
 class NewsFragment: Fragment() {
 
-    lateinit var newsAdapter : NewsAdapter
+    private lateinit var newsAdapter : NewsAdapter
     private val viewModel: MyViewModel by activityViewModels()
 
-    lateinit var progresBar : ProgressBar
-    lateinit var tv_noData :TextView
-    lateinit var recyclerView :RecyclerView
+    private lateinit var progresBar : ProgressBar
+    private lateinit var tv_noData :TextView
+    private lateinit var recyclerView :RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,

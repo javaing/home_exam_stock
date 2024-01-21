@@ -1,18 +1,16 @@
 package com.arttseng.homeexamtravel.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.arttseng.homeexamtravel.tools.toast
 import com.arttseng.homeexamtravel.adapter.ImageAdapter
 import com.arttseng.homeexamtravel.databinding.FragmentSecondBinding
 import com.arttseng.homeexamtravel.datamodel.Attraction
-import com.arttseng.homeexamtravel.datamodel.Image
-import com.arttseng.homeexamtravel.tools.Utils
 import com.arttseng.homeexamtravel.tools.openLink
+import com.arttseng.homeexamtravel.tools.toast
 import com.arttseng.homeexamtravel.viewmodel.MyViewModel
 
 class SecondFragment : Fragment() {

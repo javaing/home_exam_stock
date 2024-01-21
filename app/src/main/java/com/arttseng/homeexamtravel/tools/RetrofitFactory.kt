@@ -11,7 +11,6 @@ class RetrofitFactory
     object WebAccess {
 
         val API : ApiClient by lazy {
-            Log.d("WebAccess", "Creating retrofit client")
             val retrofit = Retrofit.Builder()
                 .client(MyApplication.getOkHttpClient())
                 .baseUrl(Const.BaseURL)

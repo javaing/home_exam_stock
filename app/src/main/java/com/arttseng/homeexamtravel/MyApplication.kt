@@ -23,7 +23,6 @@ class MyApplication: Application() {
                         .addInterceptor(Interceptor { chain ->
                             val request: Request =
                                 chain.request().newBuilder()
-                                    //.addHeader("Accept", "application/vnd.github.v3+json")
                                     .addHeader("Accept", "application/json")
                                     .build()
                             chain.proceed(request)
