@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.arttseng.homeexamtravel.view.FirstFragment"
+        android:name="com.arttseng.homeexam.airplane.view.FirstFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.arttseng.homeexamtravel.view.SecondFragment"
+        android:name="com.arttseng.homeexam.airplane.view.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/WebViewFragment"
-        android:name="com.arttseng.homeexamtravel.view.WebViewFragment"
+        android:name="com.arttseng.homeexam.airplane.view.WebViewFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

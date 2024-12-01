@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Home Exam Travel"
+rootProject.name = "Home Exam Airplane"
 include ':app'

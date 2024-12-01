@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">Home Exam Travel</string>
     <string name="action_settings">設定</string>
-    <string name="first_fragment_label">台北旅遊</string>
-    <string name="second_fragment_label">景點介紹</string>
+    <string name="first_fragment_label">航班</string>
+    <string name="second_fragment_label">匯率</string>
     <string name="next">下一頁</string>
     <string name="previous">上一頁</string>
     <string name="language">選擇語言</string>

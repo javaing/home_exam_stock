@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.arttseng.homeexamtravel'
+    namespace 'com.arttseng.homeexam.airplane'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.arttseng.homeexamtravel"
+        applicationId "com.arttseng.homeexam.airplane"
         minSdk 28
         targetSdk 34
         versionCode 1
