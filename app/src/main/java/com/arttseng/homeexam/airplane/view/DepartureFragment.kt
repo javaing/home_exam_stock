@@ -8,22 +8,17 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arttseng.homeexam.airplane.R
-import com.arttseng.homeexam.airplane.adapter.AttractAdapter
-import com.arttseng.homeexam.airplane.datamodel.Attraction
-import com.arttseng.homeexam.airplane.datamodel.Image
+import com.arttseng.homeexam.airplane.adapter.DepartureAdapter
 import com.arttseng.homeexam.airplane.tools.Utils
-import com.arttseng.homeexam.airplane.tools.getLocaleString
 import com.arttseng.homeexam.airplane.viewmodel.MyViewModel
-import kotlinx.android.parcel.Parcelize
 
-class AttractFragment : Fragment() {
+class DepartureFragment : Fragment() {
 
-    lateinit var attractAdapter: AttractAdapter
+    lateinit var departureAdapter: DepartureAdapter
     private val viewModel: MyViewModel by activityViewModels()
 
     lateinit var progresBar : ProgressBar
@@ -44,13 +39,9 @@ class AttractFragment : Fragment() {
         tv_noData = view.findViewById(R.id.tv_noData)
         recyclerView = view.findViewById(R.id.recyclerView)
 
-        viewModel.userLang.observe(viewLifecycleOwner) { userLang ->
-            progresBar.visibility = View.VISIBLE
-            tv_noData.text = requireActivity().getLocaleString(userLang, R.string.no_data)
-        }
 
-        viewModel.attractData.observe(viewLifecycleOwner) { list ->
-            Utils.log("observe  attractData size:" + list.size)
+        viewModel.departureData.observe(viewLifecycleOwner) { list ->
+            Utils.log("observe departureData size:" + list.size)
 
             progresBar.visibility = View.GONE
             if(list.isEmpty()) {
@@ -62,20 +53,32 @@ class AttractFragment : Fragment() {
             }
 
 
-            attractAdapter.updateList(ArrayList(list))
+            departureAdapter.updateList(ArrayList(list), viewModel.airportData.value ?: emptyList())
         }
+
+        viewModel.airportData.observe(viewLifecycleOwner) { list ->
+            viewModel.departureData.value?.let { ArrayList(it) }
+                ?.let { departureAdapter.updateList(it, list) }
+        }
+
+        viewModel.isNeedReload.observe(viewLifecycleOwner) { isNeed ->
+            if (isNeed) {
+                progresBar.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+                viewModel.getDeparture()
+            }
+        }
+
 
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.addItemDecoration(
             DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
         )
-        attractAdapter = AttractAdapter {
-            val position = (it as View).tag as Int
-            val bundle = Bundle()
-            //bundle.putParcelableArrayList("Images", ArrayList( attractAdapter.unAssignList[position].images ))
-            bundle.putInt("Position", position)
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment, bundle)
+        departureAdapter = DepartureAdapter {
+
         }
-        recyclerView.adapter = attractAdapter
+        recyclerView.adapter = departureAdapter
+
+        viewModel.getDeparture()
     }
 }

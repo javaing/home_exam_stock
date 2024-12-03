@@ -8,23 +8,22 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arttseng.homeexam.airplane.R
-import com.arttseng.homeexam.airplane.adapter.NewsAdapter
-import com.arttseng.homeexam.airplane.tools.getLocaleString
+import com.arttseng.homeexam.airplane.adapter.ArrivalAdapter
+import com.arttseng.homeexam.airplane.tools.Utils
 import com.arttseng.homeexam.airplane.viewmodel.MyViewModel
 
-class NewsFragment: Fragment() {
+class ArrivalFragment : Fragment() {
 
-    private lateinit var newsAdapter : NewsAdapter
+    lateinit var adapter: ArrivalAdapter
     private val viewModel: MyViewModel by activityViewModels()
 
-    private lateinit var progresBar : ProgressBar
-    private lateinit var tv_noData :TextView
-    private lateinit var recyclerView :RecyclerView
+    lateinit var progresBar : ProgressBar
+    lateinit var tv_noData : TextView
+    lateinit var recyclerView :RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,12 +39,8 @@ class NewsFragment: Fragment() {
         tv_noData = view.findViewById(R.id.tv_noData)
         recyclerView = view.findViewById(R.id.recyclerView)
 
-        viewModel.userLang.observe(viewLifecycleOwner) { userLang ->
-            progresBar.visibility = View.VISIBLE
-            tv_noData.text = requireActivity().getLocaleString(userLang, R.string.no_data)
-        }
-        viewModel.newsData.observe(viewLifecycleOwner) { list ->
-            print("art fragment list size:" + list.size)
+        viewModel.arrivalPlaneData.observe(viewLifecycleOwner) { list ->
+            Utils.log("observe arrivalPlaneData size:" + list.size)
 
             progresBar.visibility = View.GONE
             if(list.isEmpty()) {
@@ -56,19 +51,33 @@ class NewsFragment: Fragment() {
                 tv_noData.visibility = View.GONE
             }
 
-            newsAdapter.updateList(ArrayList(list))
+
+            adapter.updateList(ArrayList(list), viewModel.airportData.value ?: emptyList())
+        }
+
+        viewModel.airportData.observe(viewLifecycleOwner) { list ->
+            viewModel.arrivalPlaneData.value?.let { ArrayList(it) }
+                ?.let { adapter.updateList(it, list) }
+        }
+
+        viewModel.isNeedReload.observe(viewLifecycleOwner) { isNeed ->
+            if (isNeed) {
+                progresBar.visibility = View.VISIBLE
+                recyclerView.visibility = View.GONE
+                viewModel.getArrival()
+            }
         }
 
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         recyclerView.addItemDecoration(
             DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
         )
-        newsAdapter = NewsAdapter {
-            val position = (it as View).tag as Int
-            val bundle = Bundle()
-            bundle.putString("UserURL", newsAdapter.unAssignList[position].url)
-            findNavController().navigate(R.id.action_FirstFragment_to_WebViewFragment, bundle)
+
+        adapter = ArrivalAdapter {
+
         }
-        recyclerView.adapter = newsAdapter
+        recyclerView.adapter = adapter
+
+        viewModel.getArrival()
     }
 }

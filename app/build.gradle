@@ -16,6 +16,14 @@ android {
         versionCode 1
         versionName "1.0"
 
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('apikeys.properties').newDataInputStream())
+
+        resValue "string", "freecurrency_apikey", properties.getProperty("freecurrency_apikey", "")
+        resValue "string", "tdx_token", properties.getProperty("tdx_token", "")
+        resValue "string", "tdx_client_id", properties.getProperty("tdx_client_id", "")
+        resValue "string", "tdx_client_secret", properties.getProperty("tdx_client_secret", "")
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 

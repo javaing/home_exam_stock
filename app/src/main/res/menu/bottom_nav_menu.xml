@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.arttseng.homeexam.airplane.MainActivity">
+    <item
+        android:id="@+id/person"
+        android:title="航班"
+        android:icon="@drawable/ic_landscape"/>
+    <item
+        android:id="@+id/settings"
+        android:title="匯率"
+        android:icon="@drawable/ic_world"/>
+</menu>

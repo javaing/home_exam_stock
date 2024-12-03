@@ -4,24 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.arttseng.homeexam.airplane.R
-import com.arttseng.homeexam.airplane.adapter.AttractAdapter
-import com.arttseng.homeexam.airplane.adapter.NewsAdapter
 import com.arttseng.homeexam.airplane.databinding.FragmentFirstBinding
+import com.arttseng.homeexam.airplane.tools.Const
 import com.arttseng.homeexam.airplane.tools.Utils
-import com.arttseng.homeexam.airplane.tools.getLocaleString
-import com.arttseng.homeexam.airplane.tools.setActivityTitle
 import com.arttseng.homeexam.airplane.viewmodel.MyViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import kotlin.concurrent.fixedRateTimer
 
 
 /**
@@ -34,9 +29,10 @@ class FirstFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-    private val viewModel: MyViewModel by activityViewModels()
+    private val viewModel_Airplane: MyViewModel by activityViewModels()
     private lateinit var fragmentAdapter: FragmentAdapter
-    //private lateinit var attractAdapter: AttractAdapter
+
+    var currentCount = Const.CountDown
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,23 +52,8 @@ class FirstFragment : Fragment() {
     private fun initVM() {
         //viewModel.getNews()
         //viewModel.getAttract()
-
-        viewModel.userLang.observe(viewLifecycleOwner) { userLang ->
-            viewModel.getAttract(userLang)
-            viewModel.getNews(userLang)
-
-            try {
-                TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
-                    //tab.text = "OBJECT ${(position + 1)}"
-                    setTabHostLabel(tab, position)
-                }.attach()
-            } catch (e: Exception) {
-                e.message?.let { Utils.log(it) }
-            }
-            Utils.log("change title to:" + requireActivity().getLocaleString(userLang, R.string.first_fragment_label))
-            setActivityTitle(requireActivity().getLocaleString(userLang, R.string.first_fragment_label) )
-
-        }
+        //viewModel_Airplane.getDeparture()
+        //viewModel_Airplane.getArrival()
     }
     private fun initView() {
 
@@ -81,20 +62,47 @@ class FirstFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             setTabHostLabel(tab, position)
         }.attach()
+
+        binding.progressFirstCountDown.max = Const.CountDown
+        fixedRateTimer("timer", false, 0L, 60 * 1000) {
+            if(isAdded) {
+                requireActivity().runOnUiThread {
+                    binding.tvFirstTime.text = "目前時刻：" + SimpleDateFormat("HH:mm", Locale.US).format(Date())
+                }
+            }
+        }
+
+        fixedRateTimer("timer2", false, 0L,   1000) {
+            if(isAdded) {
+                requireActivity().runOnUiThread {
+                    currentCount--
+                    binding.progressFirstCountDown.progress = currentCount
+                    if(currentCount==0) {
+                        currentCount = Const.CountDown
+                        viewModel_Airplane.setReload(true)
+                    }
+                    Utils.log("currentCount:" + currentCount)
+                }
+            }
+        }
     }
+
+
 
     fun setTabHostLabel(tab: TabLayout.Tab, position: Int) {
         Utils.log("tab set "+position + ", tab.Position:" + tab.position)
         tab.text = when(position) {
-            0 -> requireActivity().getLocaleString(viewModel.userLang.value, R.string.second_fragment_label)
-            else -> requireActivity().getLocaleString(viewModel.userLang.value, R.string.lastest_news)
+            0 -> "起飛班機"
+            else -> "抵達班機"
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        //_binding?.pager?.adapter = null
         _binding = null
     }
+
 }
 
 class FragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
@@ -104,10 +112,10 @@ class FragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
     override fun createFragment(position: Int): Fragment {
         val fragment = when(position) {
             0 -> {
-                AttractFragment()
+                DepartureFragment()
             }
             else -> {
-                NewsFragment()
+                ArrivalFragment()
             }
         }
         return fragment

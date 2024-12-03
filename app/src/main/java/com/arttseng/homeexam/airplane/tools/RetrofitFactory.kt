@@ -1,6 +1,5 @@
 package com.arttseng.homeexam.airplane.tools
 
-import android.util.Log
 import com.arttseng.homeexam.airplane.MyApplication
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import retrofit2.Retrofit
@@ -10,15 +9,26 @@ class RetrofitFactory
 {
     object WebAccess {
 
-        val API : ApiClient by lazy {
+        val APICurrency : ApiClientCurrency by lazy {
             val retrofit = Retrofit.Builder()
                 .client(MyApplication.getOkHttpClient())
-                .baseUrl(Const.BaseURL)
+                .baseUrl(Const.BaseUrl_Currency)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
 
-            return@lazy retrofit.create(ApiClient::class.java)
+            return@lazy retrofit.create(ApiClientCurrency::class.java)
+        }
+
+        val API_Airpane : ApiClientAirplane by lazy {
+            val retrofit = Retrofit.Builder()
+                .client(MyApplication.getOkHttpClient())
+                .baseUrl(Const.BaseUrl_Airplane)
+                .addConverterFactory(MoshiConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                .build()
+
+            return@lazy retrofit.create(ApiClientAirplane::class.java)
         }
     }
 }
