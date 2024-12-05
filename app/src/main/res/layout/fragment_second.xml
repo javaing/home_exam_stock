@@ -21,14 +21,10 @@
             android:maxLines="1"
             android:textSize="18sp"
             android:padding="8dp"
-            android:text="匯率"
+            android:text="TWSE OpenData"
             />
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/tv_currency_base"/>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
