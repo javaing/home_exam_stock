@@ -18,6 +18,7 @@ class StockCardAdapter(onClick: View.OnClickListener) : RecyclerView.Adapter<Sto
     var unAssignList = arrayListOf<Stock_Day_AllItem>()
     var avgDataList = arrayListOf<Stock_Day_AVG_AllItem>()
     private val myClick = onClick
+    var isReverse = false;
 
     inner class mViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
@@ -94,5 +95,13 @@ class StockCardAdapter(onClick: View.OnClickListener) : RecyclerView.Adapter<Sto
         if(change.isEmpty()) return Color.BLACK
         if(change.equals("0.0")) return Color.BLACK
         return if( change.toDouble()> 0) Color.RED else Color.GREEN
+    }
+
+    fun reverseData(descend: Boolean) {
+        if(descend)
+            unAssignList.sortByDescending { list -> list.Code }
+        else
+            unAssignList.sortBy { list -> list.Code }
+        notifyDataSetChanged()
     }
 }

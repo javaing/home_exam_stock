@@ -37,6 +37,8 @@ class StockFragment : Fragment() {
     lateinit var bottomBehavior: BottomSheetBehavior<View>
     lateinit var bottom_sheet: View
     lateinit var toggleBottomSheet: View
+    lateinit var AtextView: View
+    lateinit var BtextView: View
 
     private val binding get() = _binding!!
 
@@ -58,6 +60,8 @@ class StockFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         bottom_sheet = view.findViewById(R.id.bottom_sheet)
         toggleBottomSheet = view.findViewById(R.id.toggleBottomSheet)
+        AtextView = view.findViewById(R.id.AtextView)
+        BtextView = view.findViewById(R.id.BtextView)
 
         viewModel.stockDayAllData.observe(viewLifecycleOwner) { list ->
             Utils.log("observe data:" + list)
@@ -80,6 +84,11 @@ class StockFragment : Fragment() {
 
         recyclerView.layoutManager = LinearLayoutManager(view.context)
         adapter = StockCardAdapter {
+            if(!bottomBehavior.isHideable) {
+                hideBottomSheet()
+                return@StockCardAdapter
+            }
+
             val Code = (it as View).tag as String
             //Utils.log("click Code:" + Code)
             //Utils.log("click viewModel.bwibbuData:" + viewModel.bwibbuData.value)
@@ -104,6 +113,14 @@ class StockFragment : Fragment() {
             } else {
                 hideBottomSheet()
             }
+        }
+        AtextView.setOnClickListener {
+            adapter.reverseData(true)
+            hideBottomSheet()
+        }
+        BtextView.setOnClickListener {
+            adapter.reverseData(false)
+            hideBottomSheet()
         }
     }
 
