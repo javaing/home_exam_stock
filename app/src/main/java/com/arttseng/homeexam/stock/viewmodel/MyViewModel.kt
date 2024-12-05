@@ -19,9 +19,9 @@ class MyViewModel : ViewModel() {
     val stockDayAvgAllData = MutableLiveData<List<Stock_Day_AVG_AllItem>>()
 
     init {
-        getBWIBBU()
-        getStockDayAll()
         getStockDayAVGAll()
+        getStockDayAll()
+        getBWIBBU()
     }
 
     fun getBWIBBU() {

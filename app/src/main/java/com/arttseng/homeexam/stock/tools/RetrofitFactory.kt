@@ -12,7 +12,7 @@ class RetrofitFactory
         val API : ApiClient by lazy {
             val retrofit = Retrofit.Builder()
                 .client(MyApplication.getOkHttpClient())
-                .baseUrl(Const.BaseUrl_TAIFEX)
+                .baseUrl(Const.BaseUrl)
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()

@@ -1,0 +1,91 @@
+
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="30dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="30dp"
+    android:padding="10dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本益比"
+            style="@style/textContent"
+            />
+
+        <TextView
+            android:id="@+id/tvPEratio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/textContent"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/cuteBlue"
+            android:text="1.23" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="殖利率"
+            style="@style/textContent"
+            />
+
+        <TextView
+            android:id="@+id/tvDividendYield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/textContent"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/cuteBlue"
+            android:text="1.23" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="股價淨值比"
+            style="@style/textContent"
+            />
+
+        <TextView
+            android:id="@+id/tvPBratio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/textContent"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/cuteBlue"
+            android:text="1.23" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="30dp"
+        android:id="@+id/btn_yes"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:layout_gravity="center_horizontal"
+        android:text="關閉"
+        android:textColor="@color/white"
+        />
+</LinearLayout>
